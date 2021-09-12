@@ -3,6 +3,7 @@ import 'package:social_stats/domain/entity/influencer.dart';
 import 'package:social_stats/domain/entity/social.dart';
 
 import 'package:social_stats/presenter/extensions/counter.dart';
+import 'package:social_stats/presenter/widgets/fade_animation.dart';
 
 class ListSocialMediaInfluencer extends StatelessWidget {
   const ListSocialMediaInfluencer({
@@ -18,17 +19,19 @@ class ListSocialMediaInfluencer extends StatelessWidget {
       delegate: SliverChildListDelegate(
         influencer.socialMedias
             .map<Widget>(
-              (socialMedia) => Card(
-                elevation: 0,
-                margin: const EdgeInsets.symmetric(vertical: 8),
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      _TitleSocialMediaCard(socialMedia: socialMedia),
-                      _ListMediaCard(socialMedia: socialMedia),
-                    ],
+              (socialMedia) => FadeAnimation(
+                child: Card(
+                  elevation: 0,
+                  margin: const EdgeInsets.symmetric(vertical: 8),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        _TitleSocialMediaCard(socialMedia: socialMedia),
+                        _ListMediaCard(socialMedia: socialMedia),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -54,8 +57,8 @@ class _TitleSocialMediaCard extends StatelessWidget {
     return Row(
       children: [
         Container(
-          height: 40,
-          width: 40,
+          height: 35,
+          width: 35,
           decoration: BoxDecoration(
             image: DecorationImage(
               image: _getImageLogoBySocialMediaName(
@@ -96,8 +99,10 @@ class _TitleSocialMediaCard extends StatelessWidget {
         Spacer(),
         IconButton(
           onPressed: onPressed,
-          disabledColor: Colors.white,
+          disabledColor: Colors.white60,
           icon: Icon(Icons.arrow_forward_ios),
+          iconSize: 20,
+          color: Colors.white60,
         ),
       ],
     );

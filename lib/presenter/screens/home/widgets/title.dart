@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:social_stats/presenter/widgets/fade_animation.dart';
 
 class TitleApp extends StatelessWidget {
   const TitleApp({
@@ -10,9 +11,11 @@ class TitleApp extends StatelessWidget {
     return SliverPadding(
       padding: const EdgeInsets.symmetric(vertical: 16),
       sliver: SliverToBoxAdapter(
-        child: Text(
-          'Social Media Influencer Analytic',
-          style: Theme.of(context).textTheme.headline1,
+        child: FadeAnimation(
+          child: Text(
+            'Social Media Influencer Analytic',
+            style: Theme.of(context).textTheme.headline1,
+          ),
         ),
       ),
     );
