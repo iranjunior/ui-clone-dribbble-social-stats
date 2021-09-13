@@ -10,8 +10,9 @@ class HomePage extends StatelessWidget {
   final influencer = Influencer(
     socialMedias: [
       SocialMedia(
-        name: SocialMediaName.instagram,
+        type: SocialMediaName.instagram,
         username: '_devmobile',
+        name: 'Iran Junior | Dev Mobile',
         likes: 2510,
         lastLikes: 2000,
         comments: 900,
@@ -22,8 +23,9 @@ class HomePage extends StatelessWidget {
         lastFollowers: 200,
       ),
       SocialMedia(
-        name: SocialMediaName.twitter,
+        type: SocialMediaName.twitter,
         username: 'iranjunior94',
+        name: 'Iran Junior | Dev Mobile',
         likes: 100,
         lastLikes: 25,
         comments: 15,
@@ -34,16 +36,17 @@ class HomePage extends StatelessWidget {
         lastFollowers: 99,
       ),
       SocialMedia(
-        name: SocialMediaName.facebook,
+        type: SocialMediaName.facebook,
         username: 'Dev Mobile',
-        likes: 100,
-        lastLikes: 25,
-        comments: 15,
-        lastComments: 10,
-        mentions: 2,
-        lastMentions: 0,
-        followers: 100,
-        lastFollowers: 99,
+        name: 'Iran Junior | Dev Mobile',
+        likes: 5020,
+        lastLikes: 2400,
+        comments: 700,
+        lastComments: 680,
+        mentions: 160,
+        lastMentions: 158,
+        followers: 600,
+        lastFollowers: 555,
       )
     ],
   );

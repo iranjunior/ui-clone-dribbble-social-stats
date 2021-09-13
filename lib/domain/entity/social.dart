@@ -1,8 +1,9 @@
 enum SocialMediaName { instagram, facebook, twitter }
 
 class SocialMedia {
-  final SocialMediaName name;
+  final SocialMediaName type;
   final String username;
+  final String? name;
   final int? followers;
   final int? lastFollowers;
   final int? likes;
@@ -13,8 +14,9 @@ class SocialMedia {
   final int? lastComments;
 
   SocialMedia({
-    required this.name,
+    required this.type,
     required this.username,
+    this.name,
     this.followers,
     this.lastFollowers,
     this.likes,

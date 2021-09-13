@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:social_stats/domain/entity/influencer.dart';
 import 'package:social_stats/domain/entity/social.dart';
-
-import 'package:social_stats/presenter/extensions/counter.dart';
+import 'package:social_stats/presenter/widgets/data_social_stats.dart';
 import 'package:social_stats/presenter/widgets/fade_animation.dart';
+import 'package:social_stats/shared/route_management.dart';
 
 class ListSocialMediaInfluencer extends StatelessWidget {
   const ListSocialMediaInfluencer({
@@ -28,8 +28,19 @@ class ListSocialMediaInfluencer extends StatelessWidget {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        _TitleSocialMediaCard(socialMedia: socialMedia),
-                        _ListMediaCard(socialMedia: socialMedia),
+                        _TitleSocialMediaCard(
+                          socialMedia: socialMedia,
+                          onPressed: () {
+                            Navigator.pushNamed(
+                              context,
+                              DetailAppRoute.route.name,
+                              arguments: DetailAppArguments(
+                                socialMedia: socialMedia,
+                              ),
+                            );
+                          },
+                        ),
+                        ListMediaCard(socialMedia: socialMedia),
                       ],
                     ),
                   ),
@@ -62,7 +73,7 @@ class _TitleSocialMediaCard extends StatelessWidget {
           decoration: BoxDecoration(
             image: DecorationImage(
               image: _getImageLogoBySocialMediaName(
-                socialMedia.name,
+                socialMedia.type,
               ),
               fit: BoxFit.cover,
               // invert color
@@ -120,118 +131,3 @@ class _TitleSocialMediaCard extends StatelessWidget {
   }
 }
 
-class _InformationMediaCard extends StatelessWidget {
-  final int value;
-  final String label;
-
-  const _InformationMediaCard({
-    Key? key,
-    required this.value,
-    required this.label,
-  }) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 8,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            value.abbreviation(),
-            style: Theme.of(context).textTheme.bodyText2,
-          ),
-          SizedBox(height: 8),
-          Text(
-            label,
-            style: Theme.of(context).textTheme.subtitle2,
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class _ListMediaCard extends StatelessWidget {
-  final SocialMedia socialMedia;
-
-  const _ListMediaCard({
-    Key? key,
-    required this.socialMedia,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Flex(
-      direction: Axis.horizontal,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        socialMedia.likes != null
-            ? Row(
-                children: [
-                  _InformationMediaCard(
-                    value: socialMedia.likes!,
-                    label: 'Likes',
-                  ),
-                  DividerVertical()
-                ],
-              )
-            : SizedBox.shrink(),
-        socialMedia.comments != null
-            ? Row(
-                children: [
-                  _InformationMediaCard(
-                    value: socialMedia.comments!,
-                    label: 'Comments',
-                  ),
-                  DividerVertical()
-                ],
-              )
-            : SizedBox.shrink(),
-        socialMedia.mentions != null
-            ? Row(
-                children: [
-                  _InformationMediaCard(
-                    value: socialMedia.mentions!,
-                    label: 'Mention',
-                  ),
-                  DividerVertical()
-                ],
-              )
-            : SizedBox.shrink(),
-        socialMedia.followers != null
-            ? _InformationMediaCard(
-                value: socialMedia.followers!,
-                label: 'Follower',
-              )
-            : SizedBox.shrink()
-      ],
-    );
-  }
-}
-
-class DividerVertical extends StatelessWidget {
-  final double _height;
-  final double _width;
-  final Color _color;
-
-  const DividerVertical({
-    Key? key,
-    double height = 55.0,
-    double width = 0.5,
-    Color color = Colors.white70,
-  })  : _height = height,
-        _width = width,
-        _color = color,
-        super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: _height,
-      width: _width,
-      color: _color,
-    );
-  }
-}
